@@ -1,0 +1,35 @@
+flowchart TD
+    Browser["🖥️ Browser\nNext.js UI\nVerdictMatrix · CitationPanel · ProgressLog"]
+
+    Route["⚙️ /api/audit\nNext.js API Route\nSSE streaming response"]
+
+    Agent["🤖 ground-agent\nAzure AI Foundry Agent Service\nGPT-4o · cite-or-abstain prompt"]
+
+    MCP["🔄 MCP Approval Loop\nDetects mcp_approval_request\nSends mcp_approval_response\nUp to 8 rounds via previous_response_id"]
+
+    IQ["🧠 Foundry IQ\nKnowledge Base: kb-ground-truth-corpus\nknowledge_base_retrieve tool"]
+
+    Standard["📄 Corpus A\nCIS Azure Benchmark v2.0\ndata/standard/cis-azure-excerpt.md"]
+
+    Evidence["📋 Corpus B\nAzure Terraform Config\ndata/evidence/sample-config.md"]
+
+    Results["📊 Audit Results\nSATISFIED ✅ · VIOLATED ❌ · UNKNOWN ⚠️\nDual citation + Remediation per verdict"]
+
+    Browser -->|"POST /api/audit"| Route
+    Route -->|"AIProjectClient\ngetOpenAIClient agentName"| Agent
+    Agent -->|"responses.create"| MCP
+    MCP -->|"knowledge_base_retrieve MCP"| IQ
+    IQ --- Standard
+    IQ --- Evidence
+    MCP -->|"Grounded JSON array"| Route
+    Route -->|"SSE data events\nstatus · done"| Browser
+    Browser --> Results
+
+    style Browser fill:#1e3a5f,stroke:#3b82f6,color:#e2e8f0
+    style Route fill:#1a1a2e,stroke:#6366f1,color:#e2e8f0
+    style Agent fill:#1a2e1a,stroke:#22c55e,color:#e2e8f0
+    style MCP fill:#2e1a1a,stroke:#f97316,color:#e2e8f0
+    style IQ fill:#2e2a1a,stroke:#eab308,color:#e2e8f0
+    style Standard fill:#1a2535,stroke:#64748b,color:#cbd5e1
+    style Evidence fill:#1a2535,stroke:#64748b,color:#cbd5e1
+    style Results fill:#1a2e1a,stroke:#22c55e,color:#e2e8f0
