@@ -25,7 +25,7 @@ Every verdict links directly to the source: the exact CIS clause number and the 
 
 ## Demo
 
-[Demo video →](#) *(link added at submission)*
+[Demo video →](https://youtu.be/_Ux32jvtwnw)
 
 ## Architecture
 
@@ -140,5 +140,5 @@ AZURE_OPENAI_DEPLOYMENT=gpt-4o
 - **Track:** Reasoning Agents
 - **Primary prize target:** Best use of IQ
 - **IQ layer:** Foundry IQ (knowledge base + cited MCP retrieval)
-- **Demo video:** [link TBD]
+- **Demo video:** [https://youtu.be/_Ux32jvtwnw](https://youtu.be/_Ux32jvtwnw)
 - **Architecture diagram:** [docs/architecture.md](docs/architecture.md)
